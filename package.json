@@ -1,0 +1,18 @@
+{
+  "type": "module",
+  "private": "true",
+  "engines": {
+    "node": "22.2.0",
+    "npm": "10.8.1"
+  },
+  "scripts": {
+    "dev": "node --env-file .env.local index.js",
+    "start": "node --env-file .env.local index.js",
+    "script": "node --env-file .env.local scripts/saveSeession.js"
+  },
+  "dependencies": {
+    "grammy": "^1.27.0",
+    "redis": "^4.6.15",
+    "telegram": "^2.22.2"
+  }
+}
