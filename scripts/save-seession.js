@@ -1,10 +1,14 @@
 import { TelegramClient } from "telegram";
 import { StringSession } from "telegram/sessions/index.js";
 import readline from "node:readline";
-import db from "../db/client.js";
+import { getConfig } from "../config/config.js";
+import { getDBClient } from "../db/client.js";
 
-const apiId = Number(process.env.APP_ID);
-const apiHash = process.env.API_HASH;
+const config = await getConfig();
+const db = await getDBClient(config);
+
+const apiId = config.app.id;
+const apiHash = config.app.hash;
 const stringSession = new StringSession("");
 
 const rl = readline.createInterface({
@@ -13,7 +17,7 @@ const rl = readline.createInterface({
 });
 
 (async () => {
-  console.log("Loading interactive example...");
+  console.log("Loading script for sessions...");
 
   const client = new TelegramClient(stringSession, apiId, apiHash, {
     connectionRetries: 5,
@@ -35,5 +39,5 @@ const rl = readline.createInterface({
     onError: (err) => console.log(err),
   });
 
-  db.set(process.env.SESSION_KEY, client.session.save());
+  db.set("session", client.session.save());
 })();
