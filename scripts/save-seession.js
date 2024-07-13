@@ -3,9 +3,11 @@ import { StringSession } from "telegram/sessions/index.js";
 import readline from "node:readline";
 import { getConfig } from "../config/config.js";
 import { getDBClient } from "../db/client.js";
+import { createLogger } from "../logger/logger.js";
 
 const config = await getConfig();
 const db = await getDBClient(config);
+const logger = createLogger();
 
 const apiId = config.app.id;
 const apiHash = config.app.hash;
@@ -17,7 +19,7 @@ const rl = readline.createInterface({
 });
 
 (async () => {
-  console.log("Loading script for sessions...");
+  logger.info("Loading script for sessions...");
 
   const client = new TelegramClient(stringSession, apiId, apiHash, {
     connectionRetries: 5,
@@ -36,7 +38,7 @@ const rl = readline.createInterface({
       new Promise((resolve) =>
         rl.question("Please enter the code you received: ", resolve)
       ),
-    onError: (err) => console.log(err),
+    onError: (err) => logger.info(err),
   });
 
   db.set("session", client.session.save());

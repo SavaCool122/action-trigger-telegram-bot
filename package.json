@@ -15,6 +15,8 @@
     "env-schema": "^6.0.0",
     "fluent-json-schema": "^5.0.0",
     "grammy": "^1.27.0",
+    "pino": "^9.2.0",
+    "pino-pretty": "^11.2.1",
     "redis": "^4.6.15",
     "telegram": "^2.22.2"
   },
