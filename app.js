@@ -17,7 +17,9 @@ const main = async () => {
   const db = await getDBClient(config, logger);
   const client = await createClient(db, config, logger);
 
-  connector(client, telegramChannelUpdateListner, [db, config, logger]);
+  const listnerLogger = logger.child({ msgPrefix: "[Listner] " });
+
+  connector(client, telegramChannelUpdateListner, [listnerLogger]);
 };
 
 main();
