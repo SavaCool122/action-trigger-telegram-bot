@@ -6,8 +6,8 @@ import { getDBClient } from "../db/client.js";
 import { createLogger } from "../logger/logger.js";
 
 const config = await getConfig();
-const db = await getDBClient(config);
 const logger = createLogger();
+const db = await getDBClient(config, logger);
 
 const apiId = config.app.id;
 const apiHash = config.app.hash;
