@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "node app.js",
     "start": "node app.js",
-    "script": "node scripts/save-seession.js",
+    "script:session": "node scripts/save-seession.js",
+    "script:upload": "node scripts/upload-file.js",
     "lint": "eslint ."
   },
   "dependencies": {

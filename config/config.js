@@ -1,7 +1,7 @@
 import envSchema from "env-schema";
 import S from "fluent-json-schema";
 
-export async function getConfig() {
+export function getConfig() {
   const env = envSchema({
     dotenv: true,
     schema: S.object()

@@ -13,7 +13,7 @@ const main = async () => {
     process.exit(1);
   });
 
-  const config = await getConfig();
+  const config = getConfig();
   const db = await getDBClient(config, logger);
   const client = await createClient(db, config, logger);
 
