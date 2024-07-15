@@ -17,7 +17,7 @@ const main = async () => {
   const db = await getDBClient(config, logger);
   const client = await createClient(db, config, logger);
 
-  connector(client, telegramChannelUpdateListner, [logger]);
+  connector(client, telegramChannelUpdateListner, [db, logger]);
 };
 
 main();
