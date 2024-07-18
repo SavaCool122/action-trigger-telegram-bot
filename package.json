@@ -9,7 +9,6 @@
     "dev": "node app.js",
     "start": "node app.js",
     "script:session": "node scripts/save-seession.js",
-    "script:upload": "node scripts/upload-file.js",
     "lint": "eslint ."
   },
   "dependencies": {
