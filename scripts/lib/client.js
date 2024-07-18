@@ -2,7 +2,7 @@ import { TelegramClient } from "telegram";
 import { StringSession } from "telegram/sessions/index.js";
 import readline from "node:readline";
 import { getConfig } from "../../config/config.js";
-import { createLogger } from "../logger/logger.js";
+import { createLogger } from "../../logger/logger.js";
 
 const config = await getConfig();
 const logger = createLogger();
