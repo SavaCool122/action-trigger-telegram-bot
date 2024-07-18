@@ -1,21 +1,21 @@
 import { createClient } from "redis";
 
-const redisURL = process.env.REDIS_URL;
+export async function getDBClient(config, logger) {
+  const client = createClient({ url: config.redis.url });
 
-const client = createClient({ url: redisURL });
+  client.on("connect", () => logger.info("DB is connecting"));
+  client.on("ready", () => logger.info("DB is ready"));
+  client.on("end", () => logger.info("DB disconnected"));
+  client.on("reconnecting", () => logger.info("DB is reconnecting"));
+  client.on("error", (e) => logger.error(e));
 
-client.on("connect", () => console.log("Cache is connecting"));
-client.on("ready", () => console.log("Cache is ready"));
-client.on("end", () => console.log("Cache disconnected"));
-client.on("reconnecting", () => console.log("Cache is reconnecting"));
-client.on("error", (e) => console.error(e));
+  (async () => {
+    await client.connect();
+  })();
 
-(async () => {
-  await client.connect();
-})();
+  process.on("SIGINT", async () => {
+    await client.disconnect();
+  });
 
-process.on("SIGINT", async () => {
-  await client.disconnect();
-});
-
-export default client;
+  return client;
+}
