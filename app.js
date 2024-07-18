@@ -2,7 +2,7 @@ import { createClient } from "./lib/server.js";
 import { getConfig } from "./config/config.js";
 import { getDBClient } from "./db/client.js";
 import { connector } from "./lib/service-connector/connector.js";
-import { telegramChannelUpdateListner } from "./lib/telegram-channel-listener/index.js";
+import { telegramChannelUpdateListner } from "./lib/telegram-channel-listener/listner.js";
 import { createLogger } from "./logger/logger.js";
 
 const main = async () => {
