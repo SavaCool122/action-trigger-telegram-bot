@@ -5,14 +5,9 @@ import { connector } from "./lib/service-connector/connector.js";
 import { telegramChannelUpdateListner } from "./lib/telegram-channel-listener/listner.js";
 import { createLogger } from "./logger/logger.js";
 
+const logger = createLogger();
+
 const main = async () => {
-  const logger = createLogger();
-
-  process.on("unhandledRejection", (err) => {
-    logger.error(err);
-    process.exit(1);
-  });
-
   const config = getConfig();
   const db = await getDBClient(config, logger);
   const client = await createClient(db, config, logger);
@@ -20,4 +15,4 @@ const main = async () => {
   connector(client, telegramChannelUpdateListner, [db, logger]);
 };
 
-main();
+main().catch(logger.error);
