@@ -7,7 +7,8 @@
     "npm": "10.8.1"
   },
   "scripts": {
-    "dev": "node app.js",
+    "dev": "node --env-file .env.development app.js",
+    "dev:prod": "node --env-file .env.production app.js",
     "start": "node app.js",
     "script:session": "node scripts/save-seession.js",
     "lint": "eslint ."
