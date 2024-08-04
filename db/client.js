@@ -1,13 +1,15 @@
 import { createClient } from "redis";
+import { createChildLogger } from "../logger/create-child-logger.js";
 
 export async function getDBClient(config, logger) {
+  const dbLogger = createChildLogger(logger, "DB");
   const client = createClient({ url: config.redis.url });
 
-  client.on("connect", () => logger.info("DB is connecting"));
-  client.on("ready", () => logger.info("DB is ready"));
-  client.on("end", () => logger.info("DB disconnected"));
-  client.on("reconnecting", () => logger.info("DB is reconnecting"));
-  client.on("error", (e) => logger.error(e));
+  client.on("connect", () => dbLogger.info("DB is connecting"));
+  client.on("ready", () => dbLogger.info("DB is ready"));
+  client.on("end", () => dbLogger.info("DB disconnected"));
+  client.on("reconnecting", () => dbLogger.info("DB is reconnecting"));
+  client.on("error", (e) => dbLogger.error(e));
 
   (async () => {
     await client.connect();
