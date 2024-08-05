@@ -38,4 +38,6 @@ export async function startAndGetClient() {
       ),
     onError: (err) => logger.info(err),
   });
+
+  return client;
 }
